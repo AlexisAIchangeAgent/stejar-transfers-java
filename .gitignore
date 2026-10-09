@@ -1,0 +1,30 @@
+# Maven
+target/
+
+# IntelliJ IDEA, VS Code, Eclipse
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Playwright
+test-results/
+
+# Python (privacy-agent)
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Note: .env is NOT ignored. It is committed on purpose for the training (fake values only),
+# so that the training can show how Claude Code settings deny reading it.
+# In a real project, .env must be listed here.
+
+# privacy-agent (cycle 6): the log and the drafts stay on your machine
+privacy-agent/output/*
+!privacy-agent/output/.gitkeep

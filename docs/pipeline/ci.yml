@@ -1,0 +1,29 @@
+# Training material. Semi-automated pipeline: build and unit tests run on every push and
+# pull request; the deploy job runs only when started by hand. No real secret, no real deploy.
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Build and unit tests
+        run: mvn -B test
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fake deploy
+        run: echo "Fake deploy of stejar-transfers to the training environment. Nothing is deployed."
